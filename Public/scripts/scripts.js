@@ -81,7 +81,7 @@ $(document).ready(()=>{
     $('#botaoAtualizarCliente').on("click",(e)=>{
         if($("#inputEstadoEdit").val() == '0' || $("#inputCidadeEdit").val() == '0'){
             e.preventDefault();
-            alert("Preencha todos os campos!");
+            alert("Selecione um Estado!");
         }
     })
     
@@ -92,6 +92,13 @@ function editarCliente(cpfCliente){
         $("#editarCliente .modal-body").html(data)
     })
 }
+
 function removerCliente(cpfCliente){
-    alert("Remover cliente cpf: "+cpfCliente)
+    $.post("/removerCliente",{cpf:cpfCliente},(data)=>{
+        if(data){
+            document.location.reload();
+        }else{
+            alert("Erro ao remover cliente")
+        }
+    })
 }

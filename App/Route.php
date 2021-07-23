@@ -24,6 +24,13 @@ class Route extends Bootstrap{
             "controller" => "IndexController",
             "action" => "atualizarCliente"
         );
+
+        $routes['removerCliente'] = array (
+            "route" => "/removerCliente",
+            "controller" => "IndexController",
+            "action" => "removerCliente"
+        );
+        
         
         // Requisições ajax
 

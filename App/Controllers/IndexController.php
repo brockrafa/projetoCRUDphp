@@ -65,6 +65,16 @@ class IndexController extends Action{
       header("Location: /");
 
     }
+
+    public function removerCliente(){
+      //Nova instancia do objeto Cliente
+      $cliente = Container::getModel("cliente");
+
+      //Setar valores nos atributos do objeto
+      $cliente->__set("cpf",$_POST['cpf']);
+
+      echo $cliente->removerCliente();
+    }
     
     
 //------------------- Requisições ajax ----------------
