@@ -4,6 +4,7 @@ namespace App\Models;
 use MF\Model\Model;
 
 class Cliente extends Model{
+    
     private $nome;
     private $cpf;
     private $rg;
@@ -69,6 +70,7 @@ class Cliente extends Model{
 
 //Remover cliente existente
     public function removerCliente(){
+
         $query="delete from clientes where cpf = :cpf";
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(":cpf",$this->__get("cpf"));
@@ -77,6 +79,7 @@ class Cliente extends Model{
 
 //Obter dados de um usuario
     public function getCustomerData(){
+
         $query="select * from clientes where cpf = :cpf";
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':cpf',$this->__get("cpf"));
