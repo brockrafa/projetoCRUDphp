@@ -19,6 +19,21 @@ class Route extends Bootstrap{
             "action" => "cadastrarNovoCliente"
         );
 
+        $routes['atualizarCliente'] = array (
+            "route" => "/atualizarCliente",
+            "controller" => "IndexController",
+            "action" => "atualizarCliente"
+        );
+        
+        // Requisições ajax
+
+        $routes['getCustomerData'] = array (
+            "route" => "/getCustomerData",
+            "controller" => "IndexController",
+            "action" => "getCustomerData"
+        );
+
+
         $this->setRoutes($routes);
     }
 

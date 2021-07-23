@@ -1,0 +1,120 @@
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label for="inputEmail4">Nome</label>
+        <input type="text" class="form-control" placeholder="Nome" name="nome" value="<?= $this->view->cliente->nome; ?>">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="inputPassword4">CPF</label>
+        <input type="text" class="form-control" placeholder="CPF" name="cpf" readonly value="<?= $this->view->cliente->cpf; ?>">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="inputEmail4">RG</label>
+        <input type="text" class="form-control" placeholder="RG" name="rg" value="<?= $this->view->cliente->rg; ?>">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="inputPassword4">Telefone</label>
+        <input type="tel" class="form-control" placeholder="Telefone" name="telefone" value="<?= $this->view->cliente->telefone; ?>">
+    </div>
+    <div class="form-group col-md-12">
+        <label for="inputEmail4">Email</label>
+        <input type="email" class="form-control" placeholder="Email" name="email" value="<?= $this->view->cliente->email; ?>">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="inputEstado">Estado</label>
+        <select id="inputEstadoEdit" class="form-control"  name="estado" value="<?= $this->view->cliente->estado; ?>">
+        <option value="0" selected>Escolher...</option>
+        </select>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="inputCidade">Cidade</label>
+        <select id="inputCidadeEdit" disabled class="form-control" name="cidade"  value="<?= $this->view->cliente->cidade; ?>">
+            <option value="0" selected>Escolha um estado...</option>
+        </select>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="inputEstado">Logradouro</label>
+        <input type="text" class="form-control" placeholder="Logradouro" name="logradouro" value="<?= $this->view->logradouro ?>">
+    </div>
+    <div class="form-group col-md-3">
+        <label for="inputCidade">Número</label>
+        <input type="text" class="form-control" placeholder="Número" name="numero" value="<?= $this->view->numero ?>">
+    </div>
+    <div class="form-group col-md-3">
+        <label for="inputCidade">Bairro</label>
+        <input type="text" class="form-control" placeholder="Bairro"  name="bairro" value="<?= $this->view->bairro ?>">
+    </div>
+
+</div><!-- Fim do row-form -->
+
+<script>
+    $(document).ready(()=>{
+        
+        //Variavel criada para armazenar os estados e cidades, para que não seja necessário duas consultas a API
+        let estadosCidades;
+
+        //Obter todos os estados e cidades do brasil 
+        $.get("https://gist.githubusercontent.com/letanure/3012978/raw/2e43be5f86eef95b915c1c804ccc86dc9790a50a/estados-cidades.json",(data)=>{
+            
+            let selEstados = document.getElementById( 'inputEstadoEdit' );
+
+            estadosCidades = JSON.parse(data);
+
+            estadosCidades.estados.forEach( function( estado ){
+
+                //Cria elemento option
+                let opt = document.createElement("option");
+                
+                //Adiciona nome do estado
+                opt.innerHTML = estado.nome;
+
+                //Adiciona ao value do option a sigla do estado
+                opt.value = estado.sigla
+                
+                //Adiciona opção no select
+                selEstados.appendChild(opt);
+
+            });
+
+        })
+
+        //Evento de CHANGE ao elemento de seleção de estado, adicionando ao SELECT cidades todas as cidades daquele estado
+        $("#inputEstadoEdit").on("change",(e)=>{
+
+            //Sigla do estado selecionado
+            let estadoSelecionado = $("#inputEstadoEdit").val();
+
+            //Elemento SELECT cidade
+            let selCidades = document.getElementById( 'inputCidadeEdit' );
+
+            //Limpando todas as options do SELECT
+            selCidades.innerHTML = ' ';
+
+            estadosCidades.estados.forEach( function( estado ){
+                if(estado.sigla == estadoSelecionado){
+                    
+                    estado.cidades.forEach(function(cidade){
+
+                        /// ;  cria elemento option de cidade
+                        let opt = document.createElement("option");
+            
+                        /// ; adiciona nome da cidade
+                        opt.innerHTML = cidade
+            
+                        opt.value = cidade
+                        
+                        /// ; adiciona opção no select
+                        selCidades.appendChild(opt);
+
+                    });//Fim forEach da lista de cidades
+                    
+                }//Fim da verificação do estado selecionado
+
+            });//Fim forEach da lista de estados
+
+            //Remoção do atributo disabled, para que seja possivel escolher uma cidade
+            selCidades.removeAttribute("disabled")
+        });
+
+    })
+
+</script>

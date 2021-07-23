@@ -30,6 +30,7 @@
                     <th>Cpf</th>
                     <th>Telefone</th>
                     <th>Email</th>
+                    <th>Estado</th>
                     <th>Cidade</th>
                     <th></th>
                     <th></th>
@@ -43,6 +44,7 @@
                         <td><?= $cliente->cpf ?></td>
                         <td><?= $cliente->telefone ?></td>
                         <td><?= $cliente->email ?></td>
+                        <td><?= $cliente->estado ?></td>
                         <td><?= $cliente->cidade ?></td>
                         <td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarCliente"  onclick="editarCliente('<?= $cliente->cpf ?>')">Editar</button></td>
                         <td><button class="btn btn-sm btn-danger" onclick="removerCliente('<?= $cliente->cpf ?>')">Remover</button></td>
@@ -53,8 +55,11 @@
 
         </table>
     </section>
+
+
     
     <!-- Modal para criar novo cliente -->
+
     <div class="modal fade" id="novoCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
         <div class="modal-dialog modal-lg" role="document">
@@ -134,6 +139,40 @@
         </div><!--Fim modal dialog -->
 
     </div>
+
+    <!-- Modal para editar cliente -->
+    
+    <div class="modal fade" id="editarCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog modal-lg" role="document">
+
+            <div class="modal-content">
+
+                <form method="POST" action="/atualizarCliente">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar cliente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                
+                    <div class="modal-body"></div><!-- Fim do modal-body -->
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="sumbit" id="botaoAtualizarCliente" class="btn btn-primary">Atualizar</button>
+                    </div>
+
+                </form>
+
+            </div><!--Fim modal content -->
+
+        </div><!--Fim modal dialog -->
+
+    </div>
+
+    
 
 </div>
 
