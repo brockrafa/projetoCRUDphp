@@ -84,7 +84,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPassword4">CPF</label>
-                                <input type="text" class="form-control" placeholder="CPF" name="cpf" required>
+                                <input type="text" class="form-control" autocomplete="off" placeholder="CPF" name="cpf" id="inputCpf" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">RG</label>
@@ -101,13 +101,13 @@
                             <div class="form-group col-md-6">
                                 <label for="inputEstado">Estado</label>
                                 <select id="inputEstado" class="form-control"  name="estado" required>
-                                <option selected>Escolher...</option>
+                                <option value="0" selected>Escolher...</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCidade">Cidade</label>
                                 <select id="inputCidade" disabled class="form-control" name="cidade" required>
-                                    <option selected>Escolha um estado...</option>
+                                    <option value="0" selected>Escolha um estado...</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">

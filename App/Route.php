@@ -40,6 +40,11 @@ class Route extends Bootstrap{
             "action" => "getCustomerData"
         );
 
+        $routes['verificarCpf'] = array (
+            "route" => "/verificarCpf",
+            "controller" => "IndexController",
+            "action" => "verificarCpf"
+        );
 
         $this->setRoutes($routes);
     }

@@ -3,6 +3,8 @@ $(document).ready(()=>{
     //Variavel criada para armazenar os estados e cidades, para que não seja necessário duas consultas a API
     let estadosCidades;
 
+    let sts;
+
     //Adiciona o plugin a tabela de listagem de clientes
     $('#tableClientes').DataTable();  
 
@@ -29,7 +31,7 @@ $(document).ready(()=>{
     
         });
 
-    })
+    });
 
     //Evento de CHANGE ao elemento de seleção de estado, adicionando ao SELECT cidades todas as cidades daquele estado
     $("#inputEstado").on("change",(e)=>{
@@ -75,31 +77,68 @@ $(document).ready(()=>{
         setTimeout(() => {
             $(".alert").fadeOut();
         }, 2000);
-    }
-    
+    };
+
+    //Verificação dos campos de estado e cidade
+    $('#botaoEnviar').on("click",(e)=>{
+      
+        if($("#inputEstado").val() == '0' || $("#inputCidade").val() == '0' ){
+            e.preventDefault();
+            alert("Selecione um Estado!");
+        } 
+        if($(".invalido").length){
+            e.preventDefault();
+            alert("O CPF digitado já está cadastrado");
+        }
+        
+    });
+
+    //Verifica se o CPF digitado já esta cadastrado
+    $("#inputCpf").on("blur",()=>{
+
+        let cpf = $('#inputCpf').val();
+        $.get("/verificarCpf?cpf="+cpf,(data)=>{
+            if(data=="1"){
+                alert("O CPF digitado já está cadastrado")
+                $('#inputCpf').addClass("invalido");
+            }else{
+                $('#inputCpf').removeClass("invalido");
+            }
+        })
+
+    })
+
     //Verificação dos campos de edição de estado e cidade
     $('#botaoAtualizarCliente').on("click",(e)=>{
         if($("#inputEstadoEdit").val() == '0' || $("#inputCidadeEdit").val() == '0'){
             e.preventDefault();
             alert("Selecione um Estado!");
         }
-    })
+    });
     
 });
 
+
+//Obtem os dados para a edição do cliente
 function editarCliente(cpfCliente){
     $.get("/getCustomerData?cpf="+cpfCliente,(data)=>{
         $("#editarCliente .modal-body").html(data)
     })
 }
 
+//Remove o cliente
 function removerCliente(cpfCliente){
-    $.post("/removerCliente",{cpf:cpfCliente},(data)=>{
-        if(data){
-            alert("Cliente removido com sucesso!")
-            document.location.reload();
-        }else{
-            alert("Erro ao remover cliente")
-        }
-    })
+
+    var r = confirm("Tem certeza que deseja remover este cliente?");
+    if(r){
+        $.post("/removerCliente",{cpf:cpfCliente},(data)=>{
+            if(data){
+                alert("Cliente removido com sucesso!")
+                window.location.href="/"
+            }else{
+                alert("Erro ao remover cliente")
+            }
+        })
+    }
+    
 }

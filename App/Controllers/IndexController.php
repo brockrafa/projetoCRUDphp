@@ -39,10 +39,14 @@ class IndexController extends Action{
       $cliente->__set("endereco",$endereco);
       
       //Salvar no banco de dados novo cliente e redirecionar a tela principal
-      if($cliente->salvarNovoCliente()){
-        header("location:/?status=1");
-      }else{
-        header("location:/?status=0");
+      try{
+        if($cliente->salvarNovoCliente()){
+          header("location:/?status=1");
+        }else{
+          header("location:/?status=0");
+        }
+      }catch(\PDOException $e){
+        echo "Erro ao inserir no banco de dados! Codigo de apoio: 8000";
       }
 
     }
@@ -111,6 +115,18 @@ class IndexController extends Action{
       //Renderizar body do modal para retorno passando o layout 'null', para nao renderizar layout
       $this->render("req/editar_cliente",null);
 
+    }
+
+    public function verificarCpf(){
+
+      //Obter instância de cliente
+      $cliente = Container::getModel('Cliente');
+
+      //Setar atributo cpf
+      $cliente->__set("cpf",$_GET['cpf']);
+
+      //Consultar existencia de cpf
+      echo $cliente->consultarCpf();
     }
 
 }

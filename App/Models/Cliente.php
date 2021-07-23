@@ -87,6 +87,15 @@ class Cliente extends Model{
         return $stmt->fetch(\PDO::FETCH_OBJ);
     }
 
+    public function consultarCpf(){
+        $query="select count(cpf) as status from clientes where cpf = :cpf";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':cpf',$this->__get("cpf"));
+        $stmt->execute();
+        $status = $stmt->fetch(\PDO::FETCH_OBJ);
+        return $status->status;
+    }
+
 }
 
 
