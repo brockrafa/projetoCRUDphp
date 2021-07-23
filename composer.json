@@ -5,7 +5,7 @@
     "authors": [
         {
             "name":"Rafael raposo",
-            "email": "rafaelsuporte99@hotmail.com"
+            "email": "rafael2403200@hotmail.com"
         }
     ],
     "autoload": {
@@ -14,5 +14,8 @@
             "MF\\":"vendor/MF/"
         }
     },
-    "description": "Projeto para avaliação vaga programador jr"
+    "description": "Projeto para avaliação vaga programador jr",
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
 }

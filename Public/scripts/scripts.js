@@ -96,6 +96,7 @@ function editarCliente(cpfCliente){
 function removerCliente(cpfCliente){
     $.post("/removerCliente",{cpf:cpfCliente},(data)=>{
         if(data){
+            alert("Cliente removido com sucesso!")
             document.location.reload();
         }else{
             alert("Erro ao remover cliente")
