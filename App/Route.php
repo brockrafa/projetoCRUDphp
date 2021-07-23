@@ -12,6 +12,12 @@ class Route extends Bootstrap{
             "controller" => "IndexController",
             "action" => "index"
         );
+        
+        $routes['cadastrarNovoCliente'] = array (
+            "route" => "/cadastrarNovoCliente",
+            "controller" => "IndexController",
+            "action" => "cadastrarNovoCliente"
+        );
 
         $this->setRoutes($routes);
     }
