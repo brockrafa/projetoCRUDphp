@@ -1,0 +1,18 @@
+{
+    "require": {
+        "php":">=7.0"
+    },
+    "authors": [
+        {
+            "name":"Rafael raposo",
+            "email": "rafaelsuporte99@hotmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\":"App/",
+            "MF\\":"vendor/MF/"
+        }
+    },
+    "description": "Projeto para avaliação vaga programador jr"
+}
