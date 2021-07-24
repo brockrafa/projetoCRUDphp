@@ -23,4 +23,9 @@
 }
 .invalido{
     background-color: rgb(248, 93, 93);
+    color: white;
+}
+.valido{
+    background-color:rgba(16, 187, 16, 0.705) ;
+    color: white;
 }

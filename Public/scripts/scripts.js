@@ -100,9 +100,11 @@ $(document).ready(()=>{
         $.get("/verificarCpf?cpf="+cpf,(data)=>{
             if(data=="1"){
                 alert("O CPF digitado já está cadastrado")
+                $('#inputCpf').removeClass("valido");
                 $('#inputCpf').addClass("invalido");
             }else{
                 $('#inputCpf').removeClass("invalido");
+                $('#inputCpf').addClass("valido");
             }
         })
 
